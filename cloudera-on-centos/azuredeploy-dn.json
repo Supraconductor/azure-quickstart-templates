@@ -277,9 +277,6 @@
       "name": "data-node",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('templateAPIVersion')]",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/shared-resources"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
