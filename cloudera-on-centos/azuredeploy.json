@@ -150,6 +150,13 @@
         "description": "Install CDH or not - not if adding new data nodes"
       }
     },
+    "indexStart": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "index to start for first data node"
+      }
+    },
     "company": {
       "type": "string",
       "defaultValue": "Company",
