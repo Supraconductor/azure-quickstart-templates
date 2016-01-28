@@ -21,7 +21,8 @@
       "type": "int"
     },
     "indexStart": {
-      "type": "int"
+      "type": "int",
+      "defaultValue": 0
     },
     "vmSpec": {
       "type": "secureobject"
