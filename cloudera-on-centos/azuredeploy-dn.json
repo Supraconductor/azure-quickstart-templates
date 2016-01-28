@@ -104,6 +104,13 @@
         "description": "Prefix for all VM IP addresses (NOT a CIDR)"
       }
     },
+      "indexStart": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "index to start for first data node"
+      }
+    },
     "masterNodeAddressStart": {
       "type": "int",
       "defaultValue": 10,
@@ -301,6 +308,9 @@
           },
           "vmCount": {
             "value": "[variables('clusterSpec').dataNodeCount]"
+          },
+          "indexStart": {
+            "value": "[parameters('indexStart')]"
           },
           "vmSpec": {
             "value": "[variables('vmSpec')]"
