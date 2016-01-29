@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{FE79E983-1569-4196-967B-C72F140DCC2B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>cloudera_on_centos</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="scripts\cmxDeployOnIbiza.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="add-hosts.json" />
+    <None Include="azuredeploy-dn.json" />
+    <None Include="azuredeploy.json" />
+    <None Include="azuredeploy.parameters.json" />
+    <None Include="data-node.json" />
+    <None Include="data-nodeds13.json" />
+    <None Include="deploy_cdh.ps1" />
+    <None Include="ds13.json" />
+    <None Include="master-node.json" />
+    <None Include="metadata.json" />
+    <None Include="README.md" />
+    <None Include="scripts\add-hosts.sh" />
+    <None Include="scripts\bootstrap-cloudera.sh" />
+    <None Include="scripts\initialize-cloudera-server.sh" />
+    <None Include="scripts\initialize-node.sh" />
+    <None Include="scripts\install-postgresql.sh" />
+    <None Include="scripts\prepare-datanode-disks.sh" />
+    <None Include="scripts\prepare-masternode-disks.sh" />
+    <None Include="setup-cloudera.json" />
+    <None Include="shared-resources.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
