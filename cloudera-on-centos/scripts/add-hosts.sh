@@ -13,10 +13,10 @@
 
 echo "initializing nodes..."
 IPPREFIX=$1
-WORKERSTARTINGIP=$3
-NAMEPREFIX=$4
-NAMESUFFIX=$5
-DATANODES=$7
+WORKERSTARTINGIP=$2
+NAMEPREFIX=$3
+NAMESUFFIX=$4
+DATANODES=$5
 
 
 # Converts a domain like machine.domain.com to domain.com by removing the machine name
