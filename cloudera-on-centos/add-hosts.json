@@ -81,7 +81,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmName'), copyIndex(), '/addHosts')]",
+      "name": "[concat(variables('vmName'), copyIndex(), '/addHostsToDN')]",
       "apiVersion": "[parameters('resourceAPIVersion')]",
       "location": "[parameters('location')]",
       "copy": {
@@ -102,7 +102,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmNameMN'), copyIndex(), '/addHosts')]",
+      "name": "[concat(variables('vmNameMN'), copyIndex(), '/addHostsToMN')]",
       "apiVersion": "[parameters('resourceAPIVersion')]",
       "location": "[parameters('location')]",
       "copy": {
