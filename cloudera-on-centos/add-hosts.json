@@ -55,8 +55,6 @@
         "name": "dataNodeNicLoop",
         "count": "[add(parameters('vmCount'), parameters('indexStart'), -1)]"
       },
-      "dependsOn": [
-      ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
         "type": "CustomScriptForLinux",
@@ -67,6 +65,7 @@
           ],
           "commandToExecute": "[concat('sh add-hosts.sh \"', parameters('networkSpec').privateIPPrefix, '\" \"', add(parameters('networkSpec').dataNodeAddressStart, parameters('indexStart')), '\" \"', parameters('dnsNamePrefix'), '\" \"', reference(concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart')))).dnsSettings.fqdn, '\" ', ' ', add(parameters('clusterSpec').dataNodeCount, parameters('indexStart')), ' >> /home/$ADMINUSER/initialize-datanode.log 2>&1')]"
         }
+      }
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
@@ -77,8 +76,6 @@
           "name": "dataNodeNicLoop",
           "count": "[parameters('masterNodeCount')]"
         },
-        "dependsOn": [
-        ],
         "properties": {
           "publisher": "Microsoft.OSTCExtensions",
           "type": "CustomScriptForLinux",
