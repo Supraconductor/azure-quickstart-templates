@@ -43,9 +43,42 @@
     "nicName": "[concat(variables('vmName'), '-nic')]",
     "storageAccountName": "[concat('dn', parameters('storageAccount').prefix)]",
     "publicIPAddressName": "[concat(variables('vmName'), '-publicIP')]",
+    "publicIPAddressNameMN": "[concat(variables('vmNameMN'), '-publicIP')]",
     "securityGroupName": "[concat(parameters('dnsNamePrefix'), '-dn-sg')]"
   },
   "resources": [
+    {
+      "apiVersion": "[parameters('resourceAPIVersion')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart')))]",
+      "location": "[parameters('location')]",
+      "copy": {
+        "name": "publicIPLoop",
+        "count": "[add(add(parameters('vmCount'), parameters('indexStart')), -1)]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[concat(parameters('dnsNamePrefix'), '-dn', copyIndex(parameters('indexStart')))]"
+        }
+      }
+    },
+    {
+      "apiVersion": "[parameters('resourceAPIVersion')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[concat(variables('publicIPAddressNameMN'), copyIndex(parameters('indexStart')))]",
+      "location": "[parameters('location')]",
+      "copy": {
+        "name": "publicIPLoop",
+        "count": "[parameters('masterNodeCount')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[concat(parameters('dnsNamePrefix'), '-dn', copyIndex(parameters('indexStart')))]"
+        }
+      }
+    },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('vmName'), copyIndex(), '/addHosts')]",
@@ -66,27 +99,27 @@
           "commandToExecute": "[concat('sh add-hosts.sh \"', parameters('networkSpec').privateIPPrefix, '\" \"', add(parameters('networkSpec').dataNodeAddressStart, parameters('indexStart')), '\" \"', parameters('dnsNamePrefix'), '\" \"', reference(concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart')))).dnsSettings.fqdn, '\" ', ' ', add(parameters('clusterSpec').dataNodeCount, parameters('indexStart')), ' >> /home/$ADMINUSER/initialize-datanode.log 2>&1')]"
         }
       }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(variables('vmNameMN'), copyIndex(), '/addHosts')]",
+      "apiVersion": "[parameters('resourceAPIVersion')]",
+      "location": "[parameters('location')]",
+      "copy": {
+        "name": "dataNodeNicLoop",
+        "count": "[parameters('masterNodeCount')]"
       },
-      {
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmNameMN'), copyIndex(), '/addHosts')]",
-        "apiVersion": "[parameters('resourceAPIVersion')]",
-        "location": "[parameters('location')]",
-        "copy": {
-          "name": "dataNodeNicLoop",
-          "count": "[parameters('masterNodeCount')]"
-        },
-        "properties": {
-          "publisher": "Microsoft.OSTCExtensions",
-          "type": "CustomScriptForLinux",
-          "typeHandlerVersion": "1.4",
-          "settings": {
-            "fileUris": [
-              "[concat(parameters('scriptsUri'), '/scripts/add-hosts.sh')]"
-            ],
-            "commandToExecute": "[concat('sh add-hosts.sh \"', parameters('networkSpec').privateIPPrefix, '\" \"', add(parameters('networkSpec').dataNodeAddressStart, parameters('indexStart')), '\" \"', parameters('dnsNamePrefix'), '\" \"', reference(concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart')))).dnsSettings.fqdn, '\" ', ' ', add(parameters('clusterSpec').dataNodeCount, parameters('indexStart')), ' >> /home/$ADMINUSER/initialize-datanode.log 2>&1')]"
-          }
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.4",
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('scriptsUri'), '/scripts/add-hosts.sh')]"
+          ],
+          "commandToExecute": "[concat('sh add-hosts.sh \"', parameters('networkSpec').privateIPPrefix, '\" \"', add(parameters('networkSpec').dataNodeAddressStart, parameters('indexStart')), '\" \"', parameters('dnsNamePrefix'), '\" \"', reference(concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart')))).dnsSettings.fqdn, '\" ', ' ', add(parameters('clusterSpec').dataNodeCount, parameters('indexStart')), ' >> /home/$ADMINUSER/initialize-datanode.log 2>&1')]"
         }
       }
-      ]
+    }
+  ]
     }
