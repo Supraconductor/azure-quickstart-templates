@@ -53,7 +53,7 @@
       "location": "[parameters('location')]",
       "copy": {
         "name": "dataNodeNicLoop",
-        "count": "[add(parameters('vmCount'), parameters('indexStart'), -1)]"
+        "count": "[add(add(parameters('vmCount'), parameters('indexStart')), -1)]"
       },
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
