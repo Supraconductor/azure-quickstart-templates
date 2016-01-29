@@ -35,7 +35,8 @@ do
   NODES+=("$IPPREFIX$IP:${NAMEPREFIX}-mn$i.$NAMESUFFIX:${NAMEPREFIX}-mn$i")
 done
 
-let "DATAEND=DATANODES-1"
+#let "DATAEND=DATANODES-1"
+let "DATAEND=99"
 for i in $(seq 0 $DATAEND)
 do 
   let "IP=i+WORKERSTARTINGIP"

@@ -323,58 +323,7 @@
           }
         }
       }
-    },
-    {
-        "name": "add-hosts",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "[variables('templateAPIVersion')]",
-        "dependsOn": [
-          "Microsoft.Resources/deployments/data-node"
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[concat(variables('scriptsUri'), '/add-hosts.json')]",
-            "contentVersion": "1.0.0.1"
-          },
-          "parameters": {
-            "resourceAPIVersion": {
-              "value": "[variables('resourceAPIVersion')]"
-            },
-            "dnsNamePrefix": {
-              "value": "[parameters('dnsNamePrefix')]"
-            },
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "scriptsUri": {
-              "value": "[variables('scriptsUri')]"
-            },
-            "storageAccount": {
-              "value": "[variables('storageAccount')]"
-            },
-            "vmCount": {
-              "value": "[variables('clusterSpec').dataNodeCount]"
-            },
-            "masterNodeCount": {
-              "value": "[variables('clusterSpec').masterNodeCount]"
-            },
-            "indexStart": {
-              "value": "[parameters('indexStart')]"
-            },
-            "vmSpec": {
-              "value": "[variables('vmSpec')]"
-            },
-            "networkSpec": {
-              "value": "[variables('networkSpec')]"
-            },
-            "clusterSpec": {
-              "value": "[variables('clusterSpec')]"
-            }
-          }
-        }
-
-      }
-      ]
     }
+      ]
+}
 
