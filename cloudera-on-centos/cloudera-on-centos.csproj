@@ -48,7 +48,6 @@
     <Content Include="scripts\cmxDeployOnIbiza.py" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="add-hosts.json" />
     <None Include="azuredeploy-dn.json" />
     <None Include="azuredeploy.json" />
     <None Include="azuredeploy.parameters.json" />
@@ -59,7 +58,6 @@
     <None Include="master-node.json" />
     <None Include="metadata.json" />
     <None Include="README.md" />
-    <None Include="scripts\add-hosts.sh" />
     <None Include="scripts\bootstrap-cloudera.sh" />
     <None Include="scripts\initialize-cloudera-server.sh" />
     <None Include="scripts\initialize-node.sh" />
