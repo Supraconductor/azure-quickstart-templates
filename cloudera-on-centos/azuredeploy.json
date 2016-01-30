@@ -143,13 +143,6 @@
         "description": "The size of the VMs deployed in the cluster (defaults to Standard_DS14)"
       }
     },
-    "installCDH": {
-      "type": "string",
-      "defaultValue": "True",
-      "metadata": {
-        "description": "Install CDH or not - not if adding new data nodes"
-      }
-    },
     "indexStart": {
       "type": "int",
       "defaultValue": 0,
@@ -241,7 +234,7 @@
   "variables": {
     "templateAPIVersion":"2015-11-01",
     "resourceAPIVersion":"2015-06-15",
-    "installCDH":"[parameters('installCDH')]",
+    "installCDH":"True",
     "addressPrefix":"[parameters('addressPrefix')]",
     "subnetPrefix":"[parameters('subnetPrefix')]",
     "nodeAddressPrefix":"[parameters('nodeAddressPrefix')]",

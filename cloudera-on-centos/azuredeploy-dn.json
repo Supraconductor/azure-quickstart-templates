@@ -15,19 +15,6 @@
         "description": "Admin password for the VMs (A mix of upper and lower-case characters, digits and symbols)"
       }
     },
-    "cmUsername": {
-      "type": "string",
-      "defaultValue": "cmadmin",
-      "metadata": {
-        "description": "User name for the Cloudera Manager"
-      }
-    },
-    "cmPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "password for the Cloudera Manager (A mix of upper and lower-case characters, digits and symbols)"
-      }
-    },
     "storageAccountPrefix": {
       "type": "string",
       "metadata": {
@@ -104,7 +91,7 @@
         "description": "Prefix for all VM IP addresses (NOT a CIDR)"
       }
     },
-      "indexStart": {
+    "indexStart": {
       "type": "int",
       "defaultValue": 0,
       "metadata": {
@@ -136,11 +123,11 @@
         "description": "T-shirt size of the Cloudera cluster (Eval, Prod)"
       }
     },
-    "numberOfDataNodes": {
+    "numberOfDataNodesToAdd": {
       "type": "int",
       "defaultValue": 3,
       "metadata": {
-        "description": "Number of data nodes for Prod (defaults to 3)"
+        "description": "Number of data nodes to add"
       }
     },
     "vmSize": {
@@ -149,99 +136,11 @@
       "metadata": {
         "description": "The size of the VMs deployed in the cluster (defaults to Standard_DS14)"
       }
-    },
-    "installCDH": {
-      "type": "string",
-      "defaultValue": "True",
-      "metadata": {
-        "description": "Install CDH or not - not if adding new data nodes"
-      }
-    },
-    "company": {
-      "type": "string",
-      "defaultValue": "Company",
-      "metadata": {
-        "description": "Your Company"
-      }
-    },
-    "emailAddress": {
-      "type": "string",
-      "defaultValue": "email@yourcompany.com",
-      "metadata": {
-        "description": "your email"
-      }
-    },
-    "businessPhone": {
-      "type": "string",
-      "defaultValue": "123456789",
-      "metadata": {
-        "description": "your business phone number"
-      }
-    },
-    "firstName": {
-      "type": "string",
-      "defaultValue": "FirstName",
-      "metadata": {
-        "description": "Your FirstName"
-      }
-    },
-    "lastName": {
-      "type": "string",
-      "defaultValue": "LastName",
-      "metadata": {
-        "description": "Your LastName"
-      }
-    },
-    "jobRole": {
-      "type": "string",
-      "defaultValue": "Administrator",
-      "metadata": {
-        "description": "Job Role"
-      },
-      "allowedValues": [
-        "Administrator",
-        "Analyst (Industry/Finance)",
-        "Analyst (Technical)",
-        "Architect",
-        "C level",
-        "Consultant",
-        "Developer",
-        "Director",
-        "Engineer",
-        "Individual contributor",
-        "Manager",
-        "Partner",
-        "Student",
-        "VP"
-      ]
-    },
-    "jobFunction": {
-      "type": "string",
-      "defaultValue": "Analytics / Business Intelligence",
-      "metadata": {
-        "description": "Job Function"
-      },
-      "allowedValues": [
-        "Analytics / Business Intelligence",
-        "Big Data / Architecture",
-        "Data Warehouse / Management",
-        "Data Science",
-        "Database",
-        "ETL / ELT",
-        "Infrastructure",
-        "IT",
-        "Marketing / Sales",
-        "Networking",
-        "Manager",
-        "Security / Compliance",
-        "Storage"
-      ]
     }
   },
   "variables": {
     "templateAPIVersion":"2015-11-01",
     "resourceAPIVersion":"2015-06-15",
-    "installCDH":"[parameters('installCDH')]",
     "addressPrefix":"[parameters('addressPrefix')]",
     "subnetPrefix":"[parameters('subnetPrefix')]",
     "nodeAddressPrefix":"[parameters('nodeAddressPrefix')]",
@@ -252,12 +151,12 @@
     },
     "clusterTshirtSizeEval": {
       "masterNodeCount": 1,
-      "dataNodeCount": "[parameters('numberOfDataNodes')]",
+      "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
       "highAvailability": "false"
     },
     "clusterTshirtSizeProd": {
       "masterNodeCount": 3,
-      "dataNodeCount": "[parameters('numberOfDataNodes')]",
+      "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
       "highAvailability": "true"
     },
     "clusterSpec": "[variables(concat('clusterTshirtSize', parameters('tshirtSize')))]",
