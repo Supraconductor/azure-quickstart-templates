@@ -193,7 +193,7 @@
     {
       "apiVersion": "[parameters('resourceAPIVersion')]",
       "type": "Microsoft.Compute/availabilitySets",
-      "name": "[parameters('dataNodeASName')]",
+      "name": "[variables('vmSpec').dataNodeASName]",
       "location": "[parameters('location')]",
       "properties": { }
     },
