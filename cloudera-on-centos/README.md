@@ -3,12 +3,12 @@ Once the trial has concluded, the Cloudera Enterprise features will be disabled 
 
 # By clicking "Deploy to Azure" you agree to the Terms and Conditions below.
 # DS14 Deployment(use this if you are not sure)
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSupraconductor%2Fazure-quickstart-templates%2Fdeploy-dev%2Fcloudera-on-centos%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSupraconductor%2Fazure-quickstart-templates%2Fmaster%2Fcloudera-on-centos%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 
 # DS14 Add data nodes
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSupraconductor%2Fazure-quickstart-templates%2Fdeploy-dev%2Fcloudera-on-centos%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSupraconductor%2Fazure-quickstart-templates%2Fmaster%2Fcloudera-on-centos%2Fazuredeploy-dn.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 
