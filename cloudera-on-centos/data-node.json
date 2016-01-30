@@ -247,7 +247,7 @@
       ],
       "properties": {
         "availabilitySet": {
-          "id": "[resourceId(parameters('clusterSpec').clusterRGName, 'Microsoft.Compute/availabilitySets', parameters('vmSpec').dataNodeASName)]"
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('vmSpec').dataNodeASName)]"
         },
         "hardwareProfile": {
           "vmSize": "[parameters('vmSpec').vmSize]"
