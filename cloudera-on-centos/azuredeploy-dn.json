@@ -201,7 +201,7 @@
       "name": "data-node",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('templateAPIVersion')]",
-      "dependsOn": [ "[concat('Microsoft.Compute/availabilitySets/', parameters('dataNodeASName'))]" ],
+      "dependsOn": [ "[concat('Microsoft.Compute/availabilitySets/', variables('vmSpec').dataNodeASName)]" ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
