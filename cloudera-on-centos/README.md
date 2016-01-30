@@ -7,6 +7,8 @@ Once the trial has concluded, the Cloudera Enterprise features will be disabled 
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
 # DS13 Deployment(smaller size machine for batch and poc)
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnetwmr01%2Fazure-quickstart-templates%2Fdeploy-dev%2Fcloudera-on-centos%2Fds13.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
