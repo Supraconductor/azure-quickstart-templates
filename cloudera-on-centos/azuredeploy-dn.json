@@ -4,7 +4,7 @@
   "parameters": {
     "adminUserName": {
       "type": "string",
-      "defaultValue": "azureuser",
+      "defaultValue": "adminuser",
       "metadata": {
         "description": "Admin user name for the VMs"
       }
@@ -17,19 +17,21 @@
     },
     "storageAccountPrefix": {
       "type": "string",
+      "defaultValue": "clouderasupra",
       "metadata": {
         "description": "Unique namespace for the Storage Account where the VM disks will be placed (alphahumeric characters only)"
       }
     },
     "dnsNamePrefix": {
       "type": "string",
+      "defaultValue": "clouderasupra",
       "metadata": {
         "description": "Unique public DNS name where the VMs will be exposed"
       }
     },
     "location": {
       "type": "string",
-      "defaultValue": "westeurope",
+      "defaultValue": "eastus",
       "allowedValues": [
         "westus",
         "eastus",
@@ -72,28 +74,28 @@
     },
     "addressPrefix": {
       "type": "string",
-      "defaultValue": "10.3.0.0/16",
+      "defaultValue": "10.11.255.0/24",
       "metadata": {
         "description": "Virtual Network address CIDR"
       }
     },
     "subnetPrefix": {
       "type": "string",
-      "defaultValue": "10.3.0.0/16",
+      "defaultValue": "10.11.255.0/25",
       "metadata": {
         "description": "CIDR for the subnet where VMs will be placed"
       }
     },
     "nodeAddressPrefix": {
       "type": "string",
-      "defaultValue": "10.3.0.",
+      "defaultValue": "10.11.255.",
       "metadata": {
         "description": "Prefix for all VM IP addresses (NOT a CIDR)"
       }
     },
     "indexStart": {
       "type": "int",
-      "defaultValue": 0,
+      "defaultValue": 3,
       "metadata": {
         "description": "index to start for first data node"
       }
@@ -125,7 +127,7 @@
     },
     "numberOfDataNodesToAdd": {
       "type": "int",
-      "defaultValue": 3,
+      "defaultValue": 2,
       "metadata": {
         "description": "Number of data nodes to add"
       }
