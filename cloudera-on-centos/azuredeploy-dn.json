@@ -33,7 +33,7 @@
       "allowedValues": [
         "westus",
         "eastus",
-        "northeurope", 
+        "northeurope",
         "westeurope",
         "eastasia",
         "southeastasia",
@@ -136,93 +136,102 @@
       "metadata": {
         "description": "The size of the VMs deployed in the cluster (defaults to Standard_DS14)"
       }
+    },
+    "clusterResourceGroupName": {
+      "type": "string",
+      "defaultValue": "cloudera",
+      "metadata": {
+        "description": "The name of the Azure resource group that contains master nodes"
+      }
     }
   },
-  "variables": {
-    "templateAPIVersion":"2015-11-01",
-    "resourceAPIVersion":"2015-06-15",
-    "addressPrefix":"[parameters('addressPrefix')]",
-    "subnetPrefix":"[parameters('subnetPrefix')]",
-    "nodeAddressPrefix":"[parameters('nodeAddressPrefix')]",
-    "scriptsUri": "https://raw.githubusercontent.com/Supraconductor/azure-quickstart-templates/master/cloudera-on-centos",
-    "storageAccount": {
-      "prefix": "[parameters('storageAccountPrefix')]",
-      "type": "[parameters('storageAccountType')]"
+    "variables": {
+      "templateAPIVersion": "2015-11-01",
+      "resourceAPIVersion": "2015-06-15",
+      "addressPrefix": "[parameters('addressPrefix')]",
+      "subnetPrefix": "[parameters('subnetPrefix')]",
+      "nodeAddressPrefix": "[parameters('nodeAddressPrefix')]",
+      "scriptsUri": "https://raw.githubusercontent.com/Supraconductor/azure-quickstart-templates/master/cloudera-on-centos",
+      "storageAccount": {
+        "prefix": "[parameters('storageAccountPrefix')]",
+        "type": "[parameters('storageAccountType')]"
+      },
+      "clusterTshirtSizeEval": {
+        "masterNodeCount": 1,
+        "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
+        "highAvailability": "false",
+        "clusterRGName": "[parameters('clusterResourceGroupName')]"
+      },
+      "clusterTshirtSizeProd": {
+        "masterNodeCount": 3,
+        "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
+        "highAvailability": "true",
+        "clusterRGName": "[parameters('clusterResourceGroupName')]"
+      },
+      "clusterSpec": "[variables(concat('clusterTshirtSize', parameters('tshirtSize')))]",
+      "vmSpec": {
+        "vmSize": "[parameters('vmSize')]",
+        "privateIPAddressPrefix": "[variables('nodeAddressPrefix')]",
+        "adminUserName": "[parameters('adminUserName')]",
+        "adminPassword": "[parameters('adminPassword')]",
+        "masterNodeASName": "[concat(parameters('dnsNamePrefix'), '-mnAS')]",
+        "dataNodeASName": "[concat(parameters('dnsNamePrefix'), '-dnAS')]"
+      },
+      "networkSpec": {
+        "addressPrefix": "[variables('addressPrefix')]",
+        "subnetPrefix": "[variables('subnetPrefix')]",
+        "privateIPPrefix": "[variables('nodeAddressPrefix')]",
+        "masterNodeAddressStart": "[parameters('masterNodeAddressStart')]",
+        "dataNodeAddressStart": "[parameters('dataNodeAddressStart')]",
+        "virtualNetworkName": "[parameters('virtualNetworkName')]",
+        "virtualNetworkSubnetName": "[parameters('subnetName')]"
+      }
     },
-    "clusterTshirtSizeEval": {
-      "masterNodeCount": 1,
-      "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
-      "highAvailability": "false"
-    },
-    "clusterTshirtSizeProd": {
-      "masterNodeCount": 3,
-      "dataNodeCount": "[parameters('numberOfDataNodesToAdd')]",
-      "highAvailability": "true"
-    },
-    "clusterSpec": "[variables(concat('clusterTshirtSize', parameters('tshirtSize')))]",
-    "vmSpec": {
-      "vmSize": "[parameters('vmSize')]",
-      "privateIPAddressPrefix": "[variables('nodeAddressPrefix')]",
-      "adminUserName": "[parameters('adminUserName')]",
-      "adminPassword": "[parameters('adminPassword')]",
-      "masterNodeASName": "[concat(parameters('dnsNamePrefix'), '-mnAS')]",
-      "dataNodeASName": "[concat(parameters('dnsNamePrefix'), '-dnAS')]"
-    },
-    "networkSpec": {
-      "addressPrefix": "[variables('addressPrefix')]",
-      "subnetPrefix": "[variables('subnetPrefix')]",
-      "privateIPPrefix": "[variables('nodeAddressPrefix')]",
-      "masterNodeAddressStart": "[parameters('masterNodeAddressStart')]",
-      "dataNodeAddressStart": "[parameters('dataNodeAddressStart')]",
-      "virtualNetworkName": "[parameters('virtualNetworkName')]",
-      "virtualNetworkSubnetName": "[parameters('subnetName')]"
-    }
-  },
-  "resources": [
-    {
-      "name": "data-node",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('templateAPIVersion')]",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('scriptsUri'), '/data-node.json')]",
-          "contentVersion": "1.0.0.1"
-        },
-        "parameters": {
-          "resourceAPIVersion": {
-            "value": "[variables('resourceAPIVersion')]"
+    "resources": [
+      {
+        "name": "data-node",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "[variables('templateAPIVersion')]",
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[concat(variables('scriptsUri'), '/data-node.json')]",
+            "contentVersion": "1.0.0.1"
           },
-          "dnsNamePrefix": {
-            "value": "[parameters('dnsNamePrefix')]"
-          },
-          "location": {
-            "value": "[parameters('location')]"
-          },
-          "scriptsUri": {
-            "value": "[variables('scriptsUri')]"
-          },
-          "storageAccount": {
-            "value": "[variables('storageAccount')]"
-          },
-          "vmCount": {
-            "value": "[variables('clusterSpec').dataNodeCount]"
-          },
-          "indexStart": {
-            "value": "[parameters('indexStart')]"
-          },
-          "vmSpec": {
-            "value": "[variables('vmSpec')]"
-          },
-          "networkSpec": {
-            "value": "[variables('networkSpec')]"
-          },
-          "clusterSpec": {
-            "value": "[variables('clusterSpec')]"
+          "parameters": {
+            "resourceAPIVersion": {
+              "value": "[variables('resourceAPIVersion')]"
+            },
+            "dnsNamePrefix": {
+              "value": "[parameters('dnsNamePrefix')]"
+            },
+            "location": {
+              "value": "[parameters('location')]"
+            },
+            "scriptsUri": {
+              "value": "[variables('scriptsUri')]"
+            },
+            "storageAccount": {
+              "value": "[variables('storageAccount')]"
+            },
+            "vmCount": {
+              "value": "[variables('clusterSpec').dataNodeCount]"
+            },
+            "indexStart": {
+              "value": "[parameters('indexStart')]"
+            },
+            "vmSpec": {
+              "value": "[variables('vmSpec')]"
+            },
+            "networkSpec": {
+              "value": "[variables('networkSpec')]"
+            },
+            "clusterSpec": {
+              "value": "[variables('clusterSpec')]"
+            }
           }
         }
       }
-    }
-      ]
-}
+    ]
+  }
 

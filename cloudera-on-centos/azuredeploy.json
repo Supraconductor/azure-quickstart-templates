@@ -46,7 +46,7 @@
       "allowedValues": [
         "westus",
         "eastus",
-        "northeurope", 
+        "northeurope",
         "westeurope",
         "eastasia",
         "southeastasia",
@@ -150,6 +150,13 @@
         "description": "index to start for first data node"
       }
     },
+    "clusterResourceGroupName": {
+      "type": "string",
+      "defaultValue": "cloudera",
+      "metadata": {
+        "description": "The name of the Azure resource group that contains master nodes"
+      }
+    },
     "company": {
       "type": "string",
       "defaultValue": "Company",
@@ -246,12 +253,14 @@
     "clusterTshirtSizeEval": {
       "masterNodeCount": 1,
       "dataNodeCount": "[parameters('numberOfDataNodes')]",
-      "highAvailability": "false"
+      "highAvailability": "false",
+      "clusterRGName": "[parameters('clusterResourceGroupName')]"
     },
     "clusterTshirtSizeProd": {
       "masterNodeCount": 3,
       "dataNodeCount": "[parameters('numberOfDataNodes')]",
-      "highAvailability": "true"
+      "highAvailability": "true",
+      "clusterRGName": "[parameters('clusterResourceGroupName')]"
     },
     "clusterSpec": "[variables(concat('clusterTshirtSize', parameters('tshirtSize')))]",
     "vmSpec": {

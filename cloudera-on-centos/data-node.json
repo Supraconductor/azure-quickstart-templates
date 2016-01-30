@@ -214,7 +214,7 @@
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[concat(parameters('networkSpec').privateIPPrefix, copyIndex(add(parameters('networkSpec').dataNodeAddressStart, parameters('indexStart'))))]",
               "subnet": {
-                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks',parameters('networkSpec').virtualNetworkName), '/subnets/', parameters('networkSpec').virtualNetworkSubnetName)]"
+                "id": "[concat(resourceId(parameters('clusterSpec').clusterRGName, 'Microsoft.Network/virtualNetworks',parameters('networkSpec').virtualNetworkName), '/subnets/', parameters('networkSpec').virtualNetworkSubnetName)]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), copyIndex(parameters('indexStart'))))]"
@@ -247,7 +247,7 @@
       ],
       "properties": {
         "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('vmSpec').dataNodeASName)]"
+          "id": "[resourceId(parameters('clusterSpec').clusterRGName, 'Microsoft.Compute/availabilitySets', parameters('vmSpec').dataNodeASName)]"
         },
         "hardwareProfile": {
           "vmSize": "[parameters('vmSpec').vmSize]"
