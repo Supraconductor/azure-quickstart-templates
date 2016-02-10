@@ -16,10 +16,8 @@ worker_ip=$4
 HA=$5
 User=$6
 Password=$7
-
 cmUser=$8
 cmPassword=$9
-
 EMAILADDRESS=${10}
 BUSINESSPHONE=${11}
 FIRSTNAME=${12}
@@ -61,7 +59,7 @@ log "Done disabling selinux"
 
 set +e
 
-log "Set cloudera-manager.repo to CM v5"
+log "Set cloudera-manager.repo to CM v5.4.9"
 yum clean all >> /tmp/initialize-cloudera-server.log
 rpm --import http://archive.cloudera.com/cdh5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera >> /tmp/initialize-cloudera-server.log
 # JFD wget http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo -O /etc/yum.repos.d/cloudera-manager.repo >> /tmp/initialize-cloudera-server.log
