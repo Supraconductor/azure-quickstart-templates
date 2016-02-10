@@ -1902,8 +1902,10 @@ def main():
     add_hosts_to_cluster()
     # Deploy CDH Parcel
     log("deploy_parcel")
+    # deploy_parcel(parcel_product=cmx.parcel[0]['product'],
+    #               parcel_version=cmx.parcel[0]['version'])
     deploy_parcel(parcel_product=cmx.parcel[0]['product'],
-                  parcel_version=cmx.parcel[0]['version'])
+                  parcel_version="5.4.9-1.cdh5.4.9.p0.19")
 
     log("setup_management")
     # Example CM API to setup Cloudera Manager Management services - not installing 'ACTIVITYMONITOR'
