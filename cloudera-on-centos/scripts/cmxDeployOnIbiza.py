@@ -77,7 +77,7 @@ def init_cluster():
 
     # Update Cloudera Manager configuration
     cm = api.get_cloudera_manager()
-    cm.update_config({"REMOTE_PARCEL_REPO_URLS": "http://archive.cloudera.com/cdh5/parcels/{latest_supported}/,"
+    cm.update_config({"REMOTE_PARCEL_REPO_URLS": "http://archive.cloudera.com/cdh5/parcels/5.4.9/,"
                                                  "http://archive.cloudera.com/impala/parcels/{latest_supported}/,"
                                                  "http://archive.cloudera.com/cdh4/parcels/{latest_supported}/,"
                                                  "http://archive.cloudera.com/search/parcels/{latest_supported}/,"
@@ -1903,9 +1903,8 @@ def main():
     # Deploy CDH Parcel
     log("deploy_parcel")
     deploy_parcel(parcel_product=cmx.parcel[0]['product'],
-                  parcel_version=cmx.parcel[0]['version'])
-    # deploy_parcel(parcel_product=cmx.parcel[0]['product'],
-    #               parcel_version="5.4.9-1.cdh5.4.9.p0.19")
+                  parcel_version="5.4.9-1.cdh5.4.9.p0.19")
+    #               parcel_version=cmx.parcel[0]['version'])
 
     log("setup_management")
     # Example CM API to setup Cloudera Manager Management services - not installing 'ACTIVITYMONITOR'
