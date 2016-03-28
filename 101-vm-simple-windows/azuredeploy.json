@@ -5,7 +5,7 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "Local username for the Virtual Machine."
+        "description": "Local username for the Virtual Machine." 
       }
     },
     "adminPassword": {
