@@ -344,7 +344,7 @@
             "name": "LoadBalancerIPConfig",
             "properties": {
               "subnet": {
-                "id": "[variables('subnetRef')]"
+                "id": "[variables('subnet1Ref')]"
               }
             }
           }
