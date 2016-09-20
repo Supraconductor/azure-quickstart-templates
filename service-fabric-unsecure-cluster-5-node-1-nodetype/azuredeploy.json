@@ -343,8 +343,8 @@
           {
             "name": "LoadBalancerIPConfig",
             "properties": {
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('lbIPName'),'-','0'))]"
+              "subnet": {
+                "id": "[variables('subnetRef')]"
               }
             }
           }
