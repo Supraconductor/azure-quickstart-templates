@@ -162,6 +162,11 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
       "location": "[resourceGroup().location]",
+        "plan": {
+        "name": "veeambackup",
+        "publisher": "veeam",
+        "product": "veeamcloudconnect"
+      },
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
